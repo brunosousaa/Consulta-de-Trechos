@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+  <head>
+
+	<!--INÍCIO CSS-->
+	<link href="/t3-assets/css/css-6709b-72673.css" rel="stylesheet" type="text/css">
+
+	<link href="/t3-assets/css/css-e2501-72576.css" rel="stylesheet" type="text/css">
+
+	<link href="/t3-assets/css/css-506de-78359.css" rel="stylesheet" type="text/css">
+
+	<link href="/t3-assets/css/css-06f41-71013.css" rel="stylesheet" type="text/css">
+
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
+
+	<link href="//fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+	<link href="//fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet" type="text/css">
+	<!--FIM CSS-->
+
+               	<!--INÍCIO RESPONSIVO-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<style type="text/stylesheet">
+
+		@-webkit-viewport   { width: device-width; }
+
+		@-moz-viewport      { width: device-width; }
+
+		@-ms-viewport       { width: device-width; }
+
+		@-o-viewport        { width: device-width; }
+
+		@viewport           { width: device-width; }
+
+	</style>
+
+	<script type="text/javascript">
+
+		//<![CDATA[
+
+		if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+
+			var msViewportStyle = document.createElement("style");
+
+			msViewportStyle.appendChild(
+
+				document.createTextNode("@-ms-viewport{width:auto!important}")
+
+			);
+
+			document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+
+		}
+
+		//]]>
+
+	</script>
+
+<meta name="HandheldFriendly" content="true">
+
+<meta name="apple-mobile-web-app-capable" content="YES">
+
+		<!--FIM RESPONSIVO-->
+
+
+
+	<meta charset="utf-8">
+
+	
+
+	<!-- jQuery -->
+
+	<script src="jquery.min.js"></script>
+
+  
+
+    <!-- Linkk que possui as cidades e estados -->
+
+    <script src="https://pastebin.com/raw/xRtAZds2" type="text/javascript"></script>
+
+
+
+	<script>
+
+		/* TESTES */		
+
+		function obterPrazoWs()
+		{
+			/*
+			console.log($("#estado1").val());
+			console.log($("#cidade1").val());
+			console.log($("#estado").val());
+			console.log($("#cidade").val());
+			console.log($("#cadastro").val());
+			*/			
+
+			$.ajax(
+
+				{
+
+					url:"ws_totvs_obter_prazo.php",
+
+					data:{
+
+						uf_destino:$("#estado1").val(),
+
+						cidade_destino:$("#cidade1").val(),
+
+						uf_origem:$("#estado").val(),
+
+						cidade_origem:$("#cidade").val(),
+
+						modal:$("#cadastro").val()
+
+					},
+
+					type:"POST",
+
+					dataType:"json",
+
+					success:function(data){
+
+						//DEBUG
+
+						//console.log(data);
+
+						//console.log(data.PRAZOS);
+
+						//END_DEBUG
+
+						
+
+						$("#modal").val(data.PRAZOS[0].DESCRICAO["0"]);
+
+						$("#embarque").val(data.PRAZOS[5].TPPRAZO["0"]);
+
+						$("#prazo").val(data.PRAZOS[4].PRAZO["0"]);
+
+					},
+					error:function(result){
+						//console.log(result);
+					}
+
+				}
+
+			);
+
+		}
+
+	</script>
+	
+  </head>
+
+<body>
+
+  <div class="l-col" id="mediaoptions" style="
+
+    height: 750px;
+
+    padding-right: 4px;
+
+    padding-left: 10px;
+
+    margin-left: 0px;">
+
+    <!--Título-->
+
+    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">         
+
+        <h1>Consulta de Trechos  <font size="2"> *Após o embarque </font></h1>
+
+    </div>
+
+
+
+
+
+    
+
+    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+
+      <script type="text/javascript">
+
+        window.onload = function() {
+
+
+
+          new dgCidadesEstados({
+
+            estado: document.getElementById('estado'),
+
+            cidade: document.getElementById('cidade'),
+
+            estadoVal: '<%=Request("estado") %>',
+
+            cidadeVal: '<%=Request("cidade") %>'
+
+          });
+
+          
+
+          new dgCidadesEstados({
+
+            estado: document.getElementById('estado1'),
+
+            cidade: document.getElementById('cidade1'),
+
+            estadoVal: '<%=Request("estado") %>',
+
+            cidadeVal: '<%=Request("cidade") %>'
+
+          });
+
+          
+
+        }
+
+      </script>
+
+
+
+<label>
+
+      <p style="
+
+          margin-bottom: 7px;
+
+      ">UF</p> <!--CAMPO ESTADOS ORIGEM-->
+
+      <select id="estado" name="estado"><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select>
+
+</label>
+
+
+
+<label style="margin-bottom: 20px;margin-right: 15px;">
+
+    <p style="margin-bottom: 7px;">Origem</p> <!--CAMPO CIDADE ORIGEM-->
+
+            <select id="cidade" name="cidade"><option value="">Selecione uma cidade</option><option value="RIO BRANCO">RIO BRANCO</option><option value="CRUZEIRO DO SUL">CRUZEIRO DO SUL</option><option value="ACRELANDIA">ACRELANDIA</option><option value="ASSIS BRASIL">ASSIS BRASIL</option><option value="BRASILEIA">BRASILEIA</option><option value="BUJARI">BUJARI</option><option value="CAPIXABA">CAPIXABA</option><option value="EPITACIOLANDIA">EPITACIOLANDIA</option><option value="FEIJO">FEIJO</option><option value="JORDAO">JORDAO</option><option value="MANCIO LIMA">MANCIO LIMA</option><option value="MANOEL URBANO">MANOEL URBANO</option><option value="MARECHAL THAUMATURGO">MARECHAL THAUMATURGO</option><option value="PLACIDO DE CASTRO">PLACIDO DE CASTRO</option><option value="PORTO ACRE">PORTO ACRE</option><option value="PORTO WALTER">PORTO WALTER</option><option value="RODRIGUES ALVES">RODRIGUES ALVES</option><option value="SENA MADUREIRA">SENA MADUREIRA</option><option value="SENADOR GUIOMARD">SENADOR GUIOMARD</option><option value="TARAUACA">TARAUACA</option><option value="XAPURI">XAPURI</option></select>
+
+</label>
+
+
+
+<label> 
+
+  <p style="margin-bottom: 7px;">UF</p> <!--CAMPO ESTADOS DESTINO-->
+
+              <select id="estado1" name="estado1"><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select>
+
+</label>
+
+
+
+<label style="margin-bottom: 20px;margin-right: 15px;">
+
+<p style="margin-bottom: 7px;">Destino</p> <!--CAMPO CIDADES DESTINO-->
+
+          <select id="cidade1" name="cidade1"><option value="">Selecione uma cidade</option><option value="RIO BRANCO">RIO BRANCO</option><option value="CRUZEIRO DO SUL">CRUZEIRO DO SUL</option><option value="ACRELANDIA">ACRELANDIA</option><option value="ASSIS BRASIL">ASSIS BRASIL</option><option value="BRASILEIA">BRASILEIA</option><option value="BUJARI">BUJARI</option><option value="CAPIXABA">CAPIXABA</option><option value="EPITACIOLANDIA">EPITACIOLANDIA</option><option value="FEIJO">FEIJO</option><option value="JORDAO">JORDAO</option><option value="MANCIO LIMA">MANCIO LIMA</option><option value="MANOEL URBANO">MANOEL URBANO</option><option value="MARECHAL THAUMATURGO">MARECHAL THAUMATURGO</option><option value="PLACIDO DE CASTRO">PLACIDO DE CASTRO</option><option value="PORTO ACRE">PORTO ACRE</option><option value="PORTO WALTER">PORTO WALTER</option><option value="RODRIGUES ALVES">RODRIGUES ALVES</option><option value="SENA MADUREIRA">SENA MADUREIRA</option><option value="SENADOR GUIOMARD">SENADOR GUIOMARD</option><option value="TARAUACA">TARAUACA</option><option value="XAPURI">XAPURI</option></select>  
+
+</label> 
+
+
+
+
+<label>
+
+<p style="margin-bottom: 7px;">Modalidade</p> <!--CAMPO DO COMBOBOX-->
+
+      <select id="cadastro" name="cadastro">
+
+        <option value="T13">Rodoexpress</option>
+
+        <option value="TD7">Aéreo Convencional</option>
+
+        <option value="T05">Aéreo Expresso</option>
+
+      </select>
+
+</label><label>
+
+ <!--BOTAO DE CONSULTA-->
+
+      <button id="botao" style="margin-left: 15px;" onclick="obterPrazoWs();">Consultar</button>
+
+</label>    
+
+    
+
+    
+
+</div>
+
+<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+
+
+
+    <label>
+
+<p style="margin-bottom: 7px;">Modalidade</p>
+
+<input disabled="" type="text" id="modal" value="">
+
+</label>
+
+    
+
+    
+
+<label>
+
+<p style="margin-bottom: 7px;">Dias de Embarque</p>
+
+<input disabled="" type="text" id="embarque" value="">
+
+</label>
+
+
+
+    
+
+<label>
+
+<p style="margin-bottom: 7px;">Prazo de Entrega (úteis)</p>
+
+<input disabled="" type="text" id="prazo" value="">
+
+</label>
+
+
+
+<!--ALTERAÇÃO DAS TEXTBOXS DE PRAZO, DIAS DE EMBARQUE E MODALIDADE-->
+
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
+<script id="rendered-js">
+
+	/*
+
+	var modal = ["Rodoexpress", "Aéreo Convencional", "Aéreo Expresso","Todos"];
+
+	var prazo = ["3", "4", "1"];
+
+	var embarque = ["Terça e Sexta", "Todo dia", "Próximo voo"];
+
+	*/
+
+  
+  /*
+	document.getElementById("botao").addEventListener(
+
+		"click",
+
+		function(){	
+
+			obterPrazoWs();
+
+
+			//document.getElementById("modal").value = modal[this.selectedIndex];
+
+			//document.getElementById("prazo").value = prazo[this.selectedIndex];
+
+			//document.getElementById("embarque").value = embarque[this.selectedIndex];
+			
+
+		}
+
+	);
+	*/
+
+</script>
+
+    
+
+</div></div>
+
+
+
+
+
+</body></html>
+
